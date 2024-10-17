@@ -1,8 +1,8 @@
 {
-    "name": "purchaseapp",
+    "name": "CRM",
     "version": "1.0.0",
-    "description": "First Angular 17 Project",
-    "author": "Eugene Popov metanit.com",
+    "description": "learning project",
+    "author": "Owl from Ugona.net service",
     "scripts": {
       "ng": "ng",
       "start": "ng serve",

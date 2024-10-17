@@ -16,6 +16,7 @@
               "zone.js"
             ],
             "tsConfig": "tsconfig.json",
+            "styles": ["src/style.css"],
             "aot": true
           }
         },
