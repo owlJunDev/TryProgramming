@@ -1,0 +1,41 @@
+body {
+    margin: 0%;
+    padding: 0%;
+    height: 100%;
+    background: #393646;
+    color: #96cc72;
+}
+
+html {
+    margin: 0%;
+    padding: 0%;
+    height: 100%;
+}
+button {
+    border: 0;
+    box-shadow: 0;
+}
+.d-header {
+    background-color: #07021a;
+    min-width: 100%;
+    height: 7%;
+    display: inline-block;
+}
+.dh-b{
+    height: 100%;
+    width: 8%;
+    color: #07021a;
+    background-color: #96cc72;
+    font: 2em sans-serif;
+}
+.dh-b:hover {
+    
+}
+.dh-b-end{
+    height: 100%;
+    width: 8%;
+    color: #393646;
+    background-color: #96cc72;
+    font: 2em sans-serif;
+    float: right;
+}

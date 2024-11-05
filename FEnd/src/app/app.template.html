@@ -1,5 +1,30 @@
-<div class="header">Test</div>
-<div class="body">
-    <div class="leftside"></div>
-    <div class="main"></div>
+<div>
+
+    <h1>Список Заметок</h1>
+
+    <div class="d-header">
+        <button id="myBtn">Поиск</button>
+    </div>
+    <div class="d-conent">
+        <div class="d-card">
+            <input type="hidden" value="{{ 1 }}" />
+            <div class="title-note"> {{ "fwew" }}
+                <div style="float: right;">
+                    <label class="icon-box-edit">✒</label>
+                    <label class="icon-box-delete">🗑</label>
+                </div>
+            </div>
+            <div class="content-note">{{ "note.content" }}</div>
+            <div class="footer-note">
+                <div class="tag-list-note">
+                    <div class="tag-note">tag</div>
+                </div>
+                <div class="content-createAt">
+                    {{ "note.time" }} <br>
+                    {{ "note.date" }} <br>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </div>

@@ -1,0 +1,59 @@
+html, body {
+    margin: 0%;
+    border: 0;
+    padding: 0%;
+}
+body {
+    height: 100%;
+    background: #3A412C;
+    color: #5C8855;
+}
+button {
+    border: 0;
+    box-shadow: 0;
+}
+html {
+    margin: 0%;
+    padding: 0%;
+    height: 100%;
+}
+.d-auth {
+    font-size: 36px;
+    margin: auto;
+    background: #D49A7A;
+    color: #5C8855;
+    border-radius: 15px;
+    /* margin: 15%; */
+    padding: 50px;
+    width: 35%;
+    height: 50%;
+}
+
+.d-auth p, h1 {
+    padding: 0;
+    margin: 0;
+}
+
+.d-header {
+    background-color: #393646;
+    min-width: 100%;
+    height: 8%;
+    display: inline-block;
+}
+
+.da-input {
+    background: #393646;
+    font-size: 24px;
+    color: #A3722F;
+    /* border: 1px solid #96cc72; */
+    border-radius: 5px;
+}
+
+.da-but{
+    color: #393646;
+    font-size: 36px;
+    margin: auto;
+    margin-bottom: 0px;
+    background-color: #96cc72;
+    float: right;
+}

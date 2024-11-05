@@ -1,4 +1,4 @@
-@BEnd_HostAddress = http://localhost:5234
+@BEnd_HostAddress = http://localhost:5236
 
 GET {{BEnd_HostAddress}}/weatherforecast/
 Accept: application/json
