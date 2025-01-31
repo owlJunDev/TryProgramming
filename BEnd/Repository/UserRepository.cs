@@ -1,42 +1,40 @@
-using System.Collections.Concurrent;
-using System.Collections.Generic;
+using BEnd.Context;
+using BEnd.Model;
 using Microsoft.EntityFrameworkCore;
 
-using Backend.Contexts;
-using Backend.Models;
+namespace BEnd.Repository {
+    public class UserRepository {
+        private readonly ContextDB context;
 
-namespace Backend.Repositories
-{
-    public class UserRepository
-    {
-        private readonly AppDbContext context;
-
-        public UserRepository(AppDbContext context)
-        {
+        public UserRepository(ContextDB context) {
             this.context = context;
+        } 
+
+        public async Task<User?> GetUserById(Guid id) {
+            return await context.usrTable
+            .AsNoTracking()
+            .Where(u => u.id == id)
+            .FirstOrDefaultAsync();
         }
 
-        public async Task<User?> GetUser(Guid id) {
-            return await context.userTable
+        public async Task<User?> GetUserByUserNmae(String uName) {
+            return await context.usrTable
+            .AsNoTracking()
+            .Where(u => u.username == uName)
+            .FirstOrDefaultAsync();
+        }
+        public async Task<List<User>> GetAllUser() {
+            return await context.usrTable
+            .AsNoTracking()
+            .OrderBy(u => u.username)
+            .ToListAsync();
+        }
+
+        public async Task<PassHash?> GetUserPassH(Guid userId) {
+            return await context.phTable
                 .AsNoTracking()
-                .FirstOrDefaultAsync(u => u.id == id);
-        }
-
-        public async Task<List<User>> GetAll() {
-            return await context.userTable
-                .AsNoTracking()
-                .ToListAsync();
-        }
-
-        public async Task Create(User user) {
-            await context.userTable.AddAsync(user);
-            await context.SaveChangesAsync();
-        }
-
-        public async Task Delete(Guid id) {
-            await context.userTable
-                .Where(u => u.id == id)
-                .ExecuteDeleteAsync();
+                .Where(p => p.userId ==  userId)
+                .FirstOrDefaultAsync();
         }
     }
 }
