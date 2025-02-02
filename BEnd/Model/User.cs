@@ -14,6 +14,7 @@ namespace BEnd.Model
         [Column("b_day")]
         public DateTime bDay { get; set; }
 
+        public User(){}
         
         public User(string username, DateTime bDay)
         {

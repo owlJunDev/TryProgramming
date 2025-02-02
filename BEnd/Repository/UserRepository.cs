@@ -8,7 +8,15 @@ namespace BEnd.Repository {
 
         public UserRepository(ContextDB context) {
             this.context = context;
-        } 
+        }
+
+        public async Task CreateUser(User user, PassHash passHash) {
+            await context.usrTable.AddAsync(user);
+            await context.SaveChangesAsync();
+            passHash.userId = user.id;
+            await context.phTable.AddAsync(passHash);
+            await context.SaveChangesAsync();
+        }
 
         public async Task<User?> GetUserById(Guid id) {
             return await context.usrTable

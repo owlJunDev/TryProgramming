@@ -4,6 +4,8 @@ namespace BEnd.DTO
         public string username { get; set; }
         public string pass { get; set; }
 
+        public UserDTO() {}
+
         public UserDTO(string username, string pass)
         {
             this.username = username;
