@@ -22,11 +22,6 @@ namespace BEnd.Controller
             this.userServ = userServ;
         }
 
-        [HttpGet("main")]
-        [Authorize]
-        public async Task<ActionResult> TestAuth() {
-            return Ok();
-        }
 
         [HttpPost("login")]
         public async Task<ActionResult> LogIn([FromBody] UserDTO userDTO)
@@ -49,7 +44,7 @@ namespace BEnd.Controller
                     issuer: AuthOptions.ISSUER,
                     audience: AuthOptions.AUDIENCE,
                     claims: claims,
-                    expires: DateTime.UtcNow.Add(TimeSpan.FromMinutes(2)),
+                    expires: DateTime.UtcNow.Add(TimeSpan.FromMinutes(2)), //время жизни токена 2 минуты
                     signingCredentials: new SigningCredentials(AuthOptions.GetSymmetricSecurityKey(), SecurityAlgorithms.HmacSha256));
                 var encodedJwt = new JwtSecurityTokenHandler().WriteToken(jwt);
                 return Ok(Results.Json(new {

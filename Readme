@@ -4,4 +4,6 @@ Fontend
         * fnm env --use-on-cd | Out-String | Invoke-Expression
         * fnm use --install-if-missing 20
         * npm install -g @angular/cli
+Backend
+    run project: dotnet watch run --launch-profile https
         

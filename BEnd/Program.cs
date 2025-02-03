@@ -50,11 +50,18 @@ namespace BEnd
                         ValidIssuer = AuthOptions.ISSUER,
                         ValidateAudience = true,
                         ValidAudience = AuthOptions.AUDIENCE,
-                        ValidateLifetime = true,
+                        ValidateLifetime = true,// time
                         IssuerSigningKey = AuthOptions.GetSymmetricSecurityKey(),
                         ValidateIssuerSigningKey = true
                     };
                 });
+            
+            builder.Services.AddCors(option => option.AddPolicy(name: "MyCors",
+                policy => {
+                    policy.WithOrigins("http://localhost:4200")
+                        .AllowAnyMethod()
+                        .AllowAnyHeader();
+                }));
 
             var app = builder.Build();
 
@@ -73,6 +80,7 @@ namespace BEnd
             app.MapControllers();
             app.UseAuthentication();
             app.UseAuthorization();
+            app.UseCors("MyCors");
             app.Run();
         }
     }
