@@ -1,7 +1,3 @@
- html, body {
-    padding: 0%;
-    margin: 0%;
-    height: 100%;
-    background: #ada78d;
-    color: #222229;
-} 
+body {
+	background-color: rgb(238, 207, 170);
+}

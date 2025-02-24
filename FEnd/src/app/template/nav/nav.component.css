@@ -1,0 +1,109 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #333;
+    color: #fff;
+    padding: 10px 20px;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+}
+
+.site-title {
+    cursor: pointer;
+}
+
+.profile-button {
+    cursor: pointer;
+    position: relative;
+}
+
+.profile-menu {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 30px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    z-index: 1001;
+}
+
+.profile-menu button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    text-align: left;
+    background: none;
+    border: none;
+    color: #333;
+    cursor: pointer;
+}
+
+.profile-menu button:hover {
+    background-color: #f0f0f0;
+}
+
+.sidebar {
+    width: 250px;
+    height: 100vh;
+    background-color: #f4f4f4;
+    position: fixed;
+    top: 50px;
+    left: 0;
+    transition: width 0.3s;
+    overflow-y: auto;
+}
+
+.sidebar.collapsed {
+    width: 50px;
+}
+
+.sidebar.collapsed .text,
+.sidebar.collapsed .submenu {
+    display: none;
+}
+
+.sidebar-item {
+    padding: 10px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+
+.sidebar-item:hover {
+    background-color: #ddd;
+}
+
+.icon {
+    margin-right: 10px;
+}
+
+.submenu {
+    margin-left: 20px;
+    list-style-type: none;
+    padding: 0;
+}
+
+.submenu li {
+    padding: 5px 0;
+}
+
+.submenu li a {
+    text-decoration: none;
+    color: #333;
+}
+
+.main-content {
+    margin-left: 250px;
+    margin-top: 50px;
+    padding: 20px;
+    transition: margin-left 0.3s;
+}
+
+.sidebar.collapsed ~ .main-content {
+    margin-left: 50px;
+}

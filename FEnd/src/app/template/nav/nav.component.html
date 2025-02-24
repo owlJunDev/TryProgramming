@@ -1,0 +1,33 @@
+<div class="header">
+    <div class="site-title" (click)="toggleSidebar()">Совиное гнездо</div>
+    <div class="profile-button" (click)="toggleProfileMenu()">Профиль</div>
+    <div class="profile-menu" id="profileMenu">
+        <button (click)="goToProfile()">Профиль</button>
+        <button (click)="logout()">Выйти</button>
+    </div>
+</div>
+<div class="sidebar" id="sidebar">
+    <div class="sidebar-item">
+        <span class="icon">🏠</span>
+        <span class="text">Главная</span>
+    </div>
+    <div class="sidebar-item">
+        <span class="icon">📁</span>
+        <span class="text">Категория 1</span>
+        <ul class="submenu">
+            <li><a href="#">Страница 1</a></li>
+            <li><a href="#">Страница 2</a></li>
+        </ul>
+    </div>
+    <div class="sidebar-item">
+        <span class="icon">📂</span>
+        <span class="text">Категория 2</span>
+        <ul class="submenu">
+            <li><a href="#">Страница 3</a></li>
+            <li><a href="#">Страница 4</a></li>
+        </ul>
+    </div>
+</div>
+<div class="content">
+    <router-outlet></router-outlet>
+</div>

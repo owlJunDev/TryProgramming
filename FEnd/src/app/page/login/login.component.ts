@@ -1,63 +1,69 @@
 import { Component } from "@angular/core";
 import { Router } from "@angular/router";
 import { AuthService } from "../../auth/auth.service";
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
+// import { FormsModule } from "@angular/forms";
 
 @Component({
     selector: "login-app",
-    templateUrl: "login.template.html"
+    standalone: true,
+    imports: [FormsModule],
+    templateUrl: "login.template.html",
+    styleUrl: "login.style.css"
 })
 export class LoginComponent {
-    loginForm: FormGroup;
-    url: String;
+    url: string = "http://localhost:5000";
+    username: string;
+    password: string;
+    errorMessage: string;
+    showError: boolean = false;
 
     constructor(
-        private formBuilder: FormBuilder,
         private authService: AuthService,
         private router: Router
-    ) {
-        this.url = "http://localhost:5000";
-        this.loginForm = this.formBuilder.group({
-            username: ['', Validators.required],
-            password: ['', Validators.required]
-        });
-    }
+    ) { }
 
     login() {
         this.authService.login();
-        this.router.navigate(['/main']); // Перенаправление на главную страницу после входа
+        this.router.navigate(['']); // Перенаправление на главную страницу после входа
     }
-    sendMessage(): void {
-        fetch(this.url + "/test/free", {
-            method: "GET",
-            headers: {}
-        }).then(async resp => {
-            alert(resp.ok);
-            console.log(resp);
-        })
+
+    errorMess(err: string) {
+        this.showError = true;
+        this.errorMessage = err;
+        setTimeout(() => {
+            this.showError = false;
+        }, 5000);
     }
-    sendMessageAuth(): void {
-        fetch(this.url + "/test/auth", {
-            method: "GET",
-            headers: {
-                "Accept": "application/json",
-                "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoib3dsIiwiZXhwIjoxNzM4NTQ3NzY4LCJpc3MiOiJNeUF1dGhTZXJ2ZXIiLCJhdWQiOiJNeUF1dGhDbGllbnQifQ.DaK3xt5uH4APUcLr2mK9JpJp3TIQmCcBVT5-qPbNXSc"
-            }
-        }).then(async resp => {
-            alert(resp.ok);
-            console.log(resp);
-        })
-    }
-    onSubmit(): void {
-        if (this.loginForm.valid) {
-            const { username, password } = this.loginForm.value;
-            // Здесь можно добавить логику для аутентификации пользователя
-            console.log('Username:', username);
-            console.log('Password:', password);
-            // Например, вызвать сервис для логина
-        } else {
-            console.log('Форма не валидна');
+
+    onSubmit() {
+        if (this.username == null || this.password == null) {
+            this.errorMess("Произошла ошибка при отправке формы!")
+            return;
         }
+        let body = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json;charset=utf-8'
+            },
+            body: JSON.stringify({
+                "username": this.username,
+                "pass": this.password
+            })
+        };
+        fetch(this.url + "/api/auth/login", body).then(async resp => {
+            if (resp.ok) {
+                resp.json().then(res => {
+                    localStorage.setItem("jt", res["value"]["access_token"]);
+                    console.log(res["value"]["access_token"]); 
+                    console.log(localStorage.getItem("jt")); 
+                    this.login();
+                })
+            } else {
+                const data = await resp.json();
+                this.errorMess(data.value['err']);                
+            }
+        });
     }
 
 }

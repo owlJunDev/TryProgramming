@@ -1,3 +1,4 @@
+using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -12,6 +13,10 @@ namespace BEnd.Controller
         [Authorize]
         public async Task<ActionResult> TestAuth()
         {
+            var user = HttpContext.User;
+            Console.WriteLine("wwwwwwwwwwwwwwwwwwwwwwwww");
+            Console.WriteLine(user.FindFirstValue(ClaimTypes.Name));
+            Console.WriteLine("wwwwwwwwwwwwwwwwwwwwwwwww");
             return Ok("кто там?");
         }
 

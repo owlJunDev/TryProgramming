@@ -1,23 +1,19 @@
-<div class="login-container">
-    <h2>Вход в систему</h2>
-
+<div class="d-auth">
+    <h2>Авторизация</h2>
     <form (ngSubmit)="onSubmit()">
-        <div class="form-group">
-            <label for="username">Имя пользователя:</label>
-            <input type="text" id="username" name="username" ngModel required minlength="3" class="form-control" />
+        <div class="input-group">
+            <label for="username">Логин:</label>
+            <input type="text" id="username" [(ngModel)]="username" name="username" required />
         </div>
-
-        <div class="form-group">
+        <div class="input-group">
             <label for="password">Пароль:</label>
-            <input type="password" id="password" name="password" ngModel required minlength="6" class="form-control" />
+            <input type="password" id="password" [(ngModel)]="password" name="password" required />
         </div>
-
-        <button type="submit" class="btn btn-primary">Войти</button>
+        <button type="submit">Войти</button>
     </form>
-    <button type="submit" (click)="sendMessage()" class="btn btn-primary">тук-тук</button>
-    <button type="submit" (click)="sendMessageAuth()" class="btn btn-primary">тук-тук 2</button>
-
-    <div *ngIf="errorMessage" class="alert alert-danger mt-3">
-        {{ errorMessage }}
-    </div>
+    @if (showError) {
+        <div class="error-message">
+            {{ errorMessage }}
+        </div>
+    }
 </div>

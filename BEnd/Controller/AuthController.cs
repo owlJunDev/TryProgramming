@@ -26,21 +26,25 @@ namespace BEnd.Controller
         [HttpPost("login")]
         public async Task<ActionResult> LogIn([FromBody] UserDTO userDTO)
         {
+            var res = Results.Json(new {
+                    err = "не правильный пароль или имя пользователя"
+                });
             if (userDTO == null || userDTO.pass == null || userDTO.username == null)
-                return Unauthorized("не правильный пароль или имя пользователя");
+                return Unauthorized(res);
 
             User user = await userRepo.GetUserByUserNmae(userDTO.username);
             if (user == null)
-                return Unauthorized("не правильный пароль или имя пользователя");
+                return Unauthorized(res);
 
             PassHash ph = await userRepo.GetUserPassH(user.id);
             if (ph == null)
-                return Unauthorized("не правильный пароль или имя пользователя");
+                return Unauthorized(res);
 
             if (await userServ.VerifyHashedPassword(ph.passHash, userDTO.pass))
             {
                 System.Console.WriteLine("Auth");
-                var claims = new List<Claim> {new Claim(ClaimTypes.Name, userDTO.username) };var jwt = new JwtSecurityToken(
+                var claims = new List<Claim> {new Claim(ClaimTypes.Name, user.id.ToString()) };
+                var jwt = new JwtSecurityToken(
                     issuer: AuthOptions.ISSUER,
                     audience: AuthOptions.AUDIENCE,
                     claims: claims,
@@ -52,7 +56,7 @@ namespace BEnd.Controller
                     username = userDTO.username
                 }));
             }
-            return Unauthorized("не правильный пароль или имя пользователя");
+            return Unauthorized(res);
         }
     }
 }
