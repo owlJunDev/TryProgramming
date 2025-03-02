@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { Router } from "@angular/router";
 import { AuthService } from "../../auth/auth.service";
 import { RouterOutlet } from "@angular/router";
@@ -10,28 +10,54 @@ import { RouterOutlet } from "@angular/router";
     imports: [RouterOutlet],
     styleUrl: './nav.component.css'
 })
-export class NavComponent {
+export class NavComponent implements OnInit {
+    isSidebarCollapsed = false;
+    isProfileMenuVisible = false;
     constructor(
         private authService: AuthService,
         private router: Router
     ) { }
+    ngOnInit() {
+        this.isSidebarCollapsed = localStorage.getItem('isSidebarCollapsed') === 'true';
+        // this.isProfileMenuVisible = localStorage.getItem('isProfileMenuVisible') === 'true';
+    }
+
+    // Переключение сайдбара
     toggleSidebar() {
-        const sidebar = document.getElementById('sidebar');
-        sidebar.classList.toggle('collapsed');
+        this.isSidebarCollapsed = !this.isSidebarCollapsed;
+        localStorage.setItem('isSidebarCollapsed', this.isSidebarCollapsed.toString());
     }
-    
+
+    // Переключение меню профиля
     toggleProfileMenu() {
-        const profileMenu = document.getElementById('profileMenu');
-        profileMenu.style.display = profileMenu.style.display === 'block' ? 'none' : 'block';
+        this.isProfileMenuVisible = !this.isProfileMenuVisible;
+        localStorage.setItem('isProfileMenuVisible', this.isProfileMenuVisible.toString());
     }
-    
-    goToProfile() {
-        alert('Переход на страницу профиля');
-        // window.location.href = '/profile';
+
+    // Закрытие меню профиля при клике вне его
+    @HostListener('document:click', ['$event'])
+    closeProfileMenu(event: MouseEvent) {
+        const profileButton = document.getElementById('profileButton');
+        if (event.target !== profileButton && !profileButton?.contains(event.target as Node)) {
+            this.isProfileMenuVisible = false;
+        }
     }
-    
+
+    // Переключение аккордеона
+    toggleAccordion(event: MouseEvent) {
+        const header = event.currentTarget as HTMLElement;
+        header.classList.toggle('active');
+        const submenu = header.nextElementSibling as HTMLElement;
+        if (submenu.style.display === 'block') {
+            submenu.style.display = 'none';
+        } else {
+            submenu.style.display = 'block';
+        }
+    }
+
     logout() {
         // Перенаправляем на страницу авторизации
+        localStorage.removeItem('jt');
         this.router.navigate(['/login']);
     }
 }

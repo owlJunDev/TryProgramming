@@ -1,33 +1,52 @@
 <div class="header">
-    <div class="site-title" (click)="toggleSidebar()">Совиное гнездо</div>
-    <div class="profile-button" (click)="toggleProfileMenu()">Профиль</div>
-    <div class="profile-menu" id="profileMenu">
-        <button (click)="goToProfile()">Профиль</button>
-        <button (click)="logout()">Выйти</button>
-    </div>
+    <h1 class="title" (click)="toggleSidebar()">Совиное гнездо</h1>
+    <li class="profile-button fas fa-user-circle" id="profileButton" (click)="toggleProfileMenu()"></li>
+    @if (isProfileMenuVisible){
+    <div class="profile-menu">
+        <button>Профиль</button>
+        <button>Выйти</button>
+    </div>}
 </div>
-<div class="sidebar" id="sidebar">
-    <div class="sidebar-item">
-        <span class="icon">🏠</span>
-        <span class="text">Главная</span>
+<!-- Контейнер для сайдбара и контента -->
+<div class="main-container">
+    <div class="sidebar" [class.collapsed]="isSidebarCollapsed">
+        <nav>
+            <ul>
+                <li class="category">
+                    <div class="category-header" (click)="toggleAccordion($event)">
+                        <i class="fas fa-gamepad"></i>
+                        <span>Game</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <ul class="submenu">
+                        <li><i class="fas fa-dungeon"></i><span>Бункер</span></li>
+                        <li><i class="fas fa-question"></i><span>Кто Я?</span></li>
+                        <li><i class="fas fa-bomb"></i><span>БЭНГ!!!</span></li>
+                        <li><i class="fas fa-skull"></i><span>Похер</span></li>
+                        <li><i class="fas fa-chess"></i><span>Своя игра</span></li>
+                    </ul>
+                </li>
+                <li class="category">
+                    <div class="category-header" (click)="toggleAccordion($event)">
+                        <i class="fas fa-image"></i>
+                        <span>Картинки</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <ul class="submenu">
+                        <li><i class="fas fa-dungeon"></i><span>Mem</span></li>
+                        <li><i class="fas fa-question"></i><span>Art</span></li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
     </div>
-    <div class="sidebar-item">
-        <span class="icon">📁</span>
-        <span class="text">Категория 1</span>
-        <ul class="submenu">
-            <li><a href="#">Страница 1</a></li>
-            <li><a href="#">Страница 2</a></li>
-        </ul>
+
+    <div class="content" [class.collapsed]="isSidebarCollapsed">
+        <router-outlet>
+            <!-- нажать на кнопку "win" <br>
+            вставить текст " Приложения по умолчанию "<br>
+            нажать на иконку рядом с которой будет текст который вводили<br>
+            нажать на иконку браузера над которой будет надпись " Веб браузер " и после выбрать желанный браузер<br> -->
+        </router-outlet>
     </div>
-    <div class="sidebar-item">
-        <span class="icon">📂</span>
-        <span class="text">Категория 2</span>
-        <ul class="submenu">
-            <li><a href="#">Страница 3</a></li>
-            <li><a href="#">Страница 4</a></li>
-        </ul>
-    </div>
-</div>
-<div class="content">
-    <router-outlet></router-outlet>
 </div>

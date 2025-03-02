@@ -1,109 +1,140 @@
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    height: 100vh;
+    overflow: hidden;
+}
+
+/* Шапка */
 .header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: #333;
-    color: #fff;
-    padding: 10px 20px;
+    padding: 5px;
     position: fixed;
-    width: 100%;
     top: 0;
+    left: 0;
+    width: 100%;
+    height: 60px;
+    border-bottom: 1px solid black;
+    display: flex;
+    align-items: center;
     z-index: 1000;
 }
 
-.site-title {
+.title {
+    font-size: 2em;
     cursor: pointer;
+    margin-right: auto;
 }
 
 .profile-button {
     cursor: pointer;
-    position: relative;
+    font-size: 2em;
+    padding: 10px;
 }
 
 .profile-menu {
-    display: none;
     position: absolute;
-    right: 0;
-    top: 30px;
-    background-color: #fff;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    z-index: 1001;
+    top: 50px;
+    right: 8px;
+    border-radius: 5px;
+    z-index: 1000;
+    border: 1px solid black;
 }
 
 .profile-menu button {
     display: block;
     width: 100%;
     padding: 10px;
-    text-align: left;
-    background: none;
-    border: none;
-    color: #333;
+    border-bottom: 1px solid black;
     cursor: pointer;
 }
 
 .profile-menu button:hover {
-    background-color: #f0f0f0;
+    background-color: rgba(0, 0, 0, 0.1);
 }
 
+/* Контейнер для сайдбара и контента */
+.main-container {
+    display: flex;
+    /* Располагаем сайдбар и контент в один ряд */
+    height: 100vh;
+    /* Высота на всю страницу */
+    padding-top: 60px;
+    /* Отступ для шапки */
+}
+
+/* Сайдбар */
 .sidebar {
     width: 250px;
-    height: 100vh;
-    background-color: #f4f4f4;
-    position: fixed;
-    top: 50px;
-    left: 0;
-    transition: width 0.3s;
+    border-right: 1px solid black;
+    transition: width 0.3s ease;
     overflow-y: auto;
+    height: calc(100vh - 60px);
+    position: fixed;
+    left: 0;
+    top: 60px;
 }
 
 .sidebar.collapsed {
-    width: 50px;
+    width: 60px;
 }
 
-.sidebar.collapsed .text,
-.sidebar.collapsed .submenu {
+.sidebar.collapsed .category-header span,
+.sidebar.collapsed .submenu span {
     display: none;
 }
 
-.sidebar-item {
-    padding: 10px;
-    cursor: pointer;
+.sidebar.collapsed .category-header i.fa-chevron-down {
+    display: none;
+}
+
+.sidebar .category-header {
     display: flex;
     align-items: center;
+    cursor: pointer;
+    padding: 10px;
+    border-bottom: 1px solid black;
 }
 
-.sidebar-item:hover {
-    background-color: #ddd;
-}
-
-.icon {
+.sidebar .category-header i {
     margin-right: 10px;
 }
 
-.submenu {
+.sidebar .category-header .fa-chevron-down {
+    margin-left: auto;
+    transition: transform 0.3s ease;
+}
+
+.sidebar .category-header.active .fa-chevron-down {
+    transform: rotate(180deg);
+}
+
+.sidebar .submenu {
     margin-left: 20px;
-    list-style-type: none;
-    padding: 0;
+    display: none;
 }
 
-.submenu li {
-    padding: 5px 0;
+.sidebar .submenu li {
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
 
-.submenu li a {
-    text-decoration: none;
-    color: #333;
+.sidebar .submenu li:last-child {
+    border-bottom: none;
 }
 
-.main-content {
-    margin-left: 250px;
-    margin-top: 50px;
+.sidebar .submenu li i {
+    margin-right: 10px;
+}
+
+.content {
+    flex: 1;
     padding: 20px;
-    transition: margin-left 0.3s;
+    overflow-y: auto;
+    margin-left: 250px;
+    height: calc(100vh - 60px);
+    transition: margin-left 0.3s ease;
 }
 
-.sidebar.collapsed ~ .main-content {
-    margin-left: 50px;
+.content.collapsed {
+    margin-left: 60px;
 }

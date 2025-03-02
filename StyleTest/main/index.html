@@ -1,25 +1,55 @@
 <!DOCTYPE html>
 <html lang="ru">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Страница авторизации</title>
+    <title>Главная страница</title>
+    <link rel="stylesheet" href="./clear.css">
     <link rel="stylesheet" href="./style.css">
+    <!-- Подключаем FontAwesome для иконок -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
+
 <body>
-    <div class="login-container">
-        <h2>Авторизация</h2>
-        <form class="login-form">
-            <div class="input-group">
-                <label for="username">Логин:</label>
-                <input type="text" id="username" name="username" required>
-            </div>
-            <div class="input-group">
-                <label for="password">Пароль:</label>
-                <input type="password" id="password" name="password" required>
-            </div>
-            <button type="submit">Войти</button>
-        </form>
+    <div class="header">
+        <h1 class="title" id="toggleSidebar">Совиное гнездо</h1>
+        <li class="profile-button fas fa-user-circle" id="profileButton"></li>
+        <div class="profile-menu" id="profileMenu">
+            <button>Профиль</button>
+            <button>Выйти</button>
+        </div>
     </div>
+    <div class="sidebar" id="sidebar">
+        <nav>
+            <ul>
+                <li class="category">
+                    <div class="category-header">
+                        <i class="fas fa-gamepad"></i>
+                        <span>Game</span>
+                        <i class="fas fa-chevron-down"></i> <!-- Иконка для аккордеона -->
+                    </div>
+                    <ul class="submenu">
+                        <li><i class="fas fa-dungeon"></i> Бункер</li>
+                        <li><i class="fas fa-question"></i> Кто Я?</li>
+                        <li><i class="fas fa-bomb"></i> БЭНГ!!!</li>
+                        <li><i class="fas fa-skull"></i> Похер</li>
+                        <li><i class="fas fa-chess"></i> Своя игра</li>
+                    </ul>
+                </li>
+                <li class="category">
+                    <div class="category-header">
+                        <i class="fas fa-image"></i>
+                        <span>Картинки</span>
+                    </div>
+                </li>
+            </ul>
+        </nav>
+    </div>
+    <div class="content">
+        <!-- Основной контент страницы -->
+    </div>
+    <script src="script.js"></script>
 </body>
+
 </html>

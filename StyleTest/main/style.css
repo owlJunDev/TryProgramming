@@ -1,59 +1,129 @@
+/* Основные стили для страницы */
 body {
-    margin: 0;
-    padding: 0;
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
-    height: 100vh;
+    background-color: rgb(238, 207, 170); /* Основной цвет */
+}
+.header {
+    background-color: rgb(238, 207, 170); /* Основной цвет */
+    color: #000;
+    padding: 5px;
+    position: relative;
+    border-bottom: 1px solid black;
+    display: flex;
+    align-items: center;
 }
 
-.login-container {
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    width: 300px;
-    text-align: center;
+.title {
+    font-size: 2em;
+    cursor: pointer;
+    margin-right: auto; /* Перемещает название в левый край */
+}
+
+.profile-button {
+    cursor: pointer;
+    font-size: 2em;
+    padding: 10px;
+    background-color: rgb(238, 207, 170); /* Основной цвет */
+    /* border-radius: 5px;
+    border: 1px solid black; */
+    color: #000;
+}
+
+.profile-menu {
+    display: none;
     position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    top: 50px;
+    right: 8px;
+    background-color: rgb(238, 207, 170); /* Основной цвет */
+    border-radius: 5px;
+    z-index: 1000;
+    border: 1px solid black;
 }
 
-h2 {
-    margin-bottom: 20px;
-    color: #333;
-}
-
-.input-group {
-    margin-bottom: 15px;
-    text-align: left;
-}
-
-.input-group label {
+.profile-menu button {
     display: block;
-    margin-bottom: 5px;
-    color: #555;
-}
-
-.input-group input {
-    width: 100%;
-    padding: 8px;
-    box-sizing: border-box;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-}
-
-button {
     width: 100%;
     padding: 10px;
-    background-color: #28a745;
-    border: none;
-    border-radius: 4px;
-    color: #fff;
-    font-size: 16px;
+    /* margin-bottom: 5px; */
+    background-color: rgb(238, 207, 170); /* Основной цвет */
+    color: #000;
+    border-bottom: 1px solid black;
+    /* border-radius: 5px; */
     cursor: pointer;
 }
 
-button:hover {
-    background-color: #218838;
+.profile-menu button:hover {
+    background-color: rgba(0, 0, 0, 0.1); /* Легкий эффект при наведении */
+}
+
+/* Стили для сайдбара с аккордеоном */
+.sidebar {
+    width: 250px;
+    background-color: rgb(238, 207, 170); /* Основной цвет */
+    color: #000;
+    height: 100vh;
+    border-right: 1px solid black;
+    transition: width 0.3s ease;
+}
+
+.sidebar.collapsed {
+    width: 60px;
+}
+
+.sidebar.collapsed .category-header span,
+.sidebar.collapsed .submenu {
+    display: none; /* Скрываем текст и подменю в свернутом состоянии */
+}
+
+.sidebar.collapsed .category-header i.fa-chevron-down {
+    display: none; /* Скрываем стрелку в свернутом состоянии */
+}
+
+.sidebar .category-header {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    padding: 10px;
+    border-bottom: 1px solid black;
+}
+
+.sidebar .category-header i {
+    margin-right: 10px;
+}
+
+.sidebar .category-header .fa-chevron-down {
+    margin-left: auto; /* Иконка стрелки справа */
+    transition: transform 0.3s ease;
+}
+
+.sidebar .category-header.active .fa-chevron-down {
+    transform: rotate(180deg); /* Поворот стрелки при открытии */
+}
+
+.sidebar .submenu {
+    margin-left: 20px;
+    display: none; /* Скрываем подменю по умолчанию */
+}
+
+.sidebar .submenu li {
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.sidebar .submenu li:last-child {
+    border-bottom: none;
+}
+
+.sidebar .submenu li i {
+    margin-right: 10px;
+}
+
+/* Контентная область */
+.content {
+    margin-left: 250px; /* Отступ для сайдбара */
+    padding: 20px;
+    transition: margin-left 0.3s ease;
+}
+
+.sidebar.collapsed ~ .content {
+    margin-left: 60px; /* Отступ для свернутого сайдбара */
 }
